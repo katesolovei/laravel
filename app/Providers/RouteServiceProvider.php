@@ -60,4 +60,12 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
     }
+
+    protected function authenticated(Request $request, $user)
+    {
+        $message = 'Welcome to your task list';
+        return response([
+            $this->view('welcome', compact($message)),
+        ]);
+    }
 }
