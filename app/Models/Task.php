@@ -19,10 +19,11 @@ class Task extends Model
         'task_description'
     ];
 
-    public function user()
+    public function tasks()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Task::class);
     }
+
 }
 //
 //$user=App\Models\User::find(1);

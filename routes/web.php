@@ -22,10 +22,12 @@ Auth::routes();
 
 Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware('auth');
 
+Route::get('/', [TaskController::class, 'index'])->name('index');
 Route::get('/index', [TaskController::class, 'index'])->name('index');
 Route::get('/create', [TaskController::class, 'create'])->name('create');
 Route::post('/upload', [TaskController::class, 'upload'])->name('upload');
-Route::get('/edit', [TaskController::class, 'edit'])->name('edit');
+Route::patch('/update', [TaskController::class, 'update'])->name('update');
+Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit');
 Route::get('/delete', [TaskController::class, 'delete'])->name('delete');
 
 Auth::routes();

@@ -8,28 +8,92 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    /***
+     * Show all tasks method
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index(){
-        return "Hello, it's your task list page";
+        $tasks = Task::all();
+        return view('tasks.index')->with([
+            'tasks' => $tasks
+        ]);
     }
 
+    /***
+     * Create task method
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function create(){
         return view('tasks.create');
     }
 
+    /***
+     * Saving task to Data Base
+     * Setting rules for input data
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function upload(Request $request){
+        $request->validate([
+           'task_name' => 'required|max:255'
+        ]);
+
         $task_name = $request->task_name;
         $task_description = $request->task_description;
+
         Task::create([
             'task_name' => $task_name,
             'task_description' => $task_description
         ]);
 
-        return redirect()->back()->with('success', "Task created successfully!");
-//        return redirect()->back()->with('error', "Task wasn't created successfully!");
+        $tasks = Task::all();
+        return view('tasks.index')->with([
+            'tasks' => $tasks
+        ]);
     }
 
-    public function edit(){
-        return view('tasks.edit');
+    /***
+     * Showing page for updating task
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function edit($id){
+        $tasks = Task::find($id);
+
+        return view('tasks.edit')->with([
+            'tasks' => $tasks
+        ]);
+    }
+
+    /***
+     * Updating task in DB
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function update(Request $request){
+        $request->validate([
+            'task_name' => 'required|max:255'
+        ]);
+
+        $tasks = Task::find($request->id);
+//        dd($request->task_status);
+        $tasks->update([
+            'task_name' => $request->task_name,
+            'task_description' => $request->task_description,
+            'task_status' => $request->task_status
+        ]);
+
+        $tasks->save();
+        $tasks = Task::all();
+
+        return view('tasks.index')->with([
+            'tasks' => $tasks
+        ]);
     }
 
     public function delete(){
