@@ -81,6 +81,7 @@ class TaskController extends Controller
         ]);
 
         $tasks = Task::find($request->id);
+
 //        dd($request->task_status);
         $tasks->update([
             'task_name' => $request->task_name,

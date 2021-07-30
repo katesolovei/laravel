@@ -16,7 +16,8 @@ class Task extends Model
      */
     protected $fillable = [
         'task_name',
-        'task_description'
+        'task_description',
+        'task_status'
     ];
 
     public function tasks()
@@ -25,12 +26,3 @@ class Task extends Model
     }
 
 }
-//
-//$user=App\Models\User::find(1);
-//
-//foreach ($user->tasks as $task) {
-//    echo $task->task_name;
-//    echo $task->task_description;
-//    echo $task->task_owner;
-//    echo $task->task_status;
-//}

@@ -41,7 +41,7 @@
                                 <?php $task_status_name = '';?>
                             @endswitch
                             @if($i == $tasks->task_status)
-                                <option class="dropdown-item" value="{{$i}}" selecte="selected"><?php echo $task_status_name?></option>
+                                <option class="dropdown-item" value="{{$tasks->task_status}}" selected><?php echo $task_status_name?></option>
                             @else
                                 <option class="dropdown-item" value="{{$i}}"><?php echo $task_status_name?></option>
                             @endif
