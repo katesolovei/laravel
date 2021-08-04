@@ -49,8 +49,6 @@ class TaskController extends Controller
             'task_description' => $task_description
         ]);
 
-        $tasks = Task::all();
-
         return redirect('index')->with('success', 'Task created successfully!');
     }
 
@@ -61,8 +59,6 @@ class TaskController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id){
-        // change to the normal view $task = new Task();
-        //$task->fill($request->all())->save();
         $tasks = Task::find($id);
 
         return view('tasks.edit')->with([
@@ -91,7 +87,6 @@ class TaskController extends Controller
         ]);
 
         $tasks->save();
-        $tasks = Task::all();
 
         return redirect('index')->with('success', 'Task updated successfully!');
     }
