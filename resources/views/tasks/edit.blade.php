@@ -15,6 +15,7 @@
     <form action="/update" method="post">
         @csrf
         @method('patch')
+        <x-alert/>
         <div class="container">
             <div class="container container-fluid p-2 my-3 font-weight-bold">
                 <lable for='task_name' class="text-dark font-weight-bold text-lg-center">Task Name</lable>

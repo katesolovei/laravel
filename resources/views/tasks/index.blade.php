@@ -44,7 +44,10 @@
                 <td class="col-4">{{$task->task_name}}</td>
                 <td class="col-4">{{$task->task_description}}</td>
                 <td class="col-4"><?php echo $task_status_name?></td>
-                <td class="col-4 font-weight-bold"><a href="{{asset('/edit/' . $task->id )}}">Edit task</a></td>
+                <td class="font-weight-bold my-2">
+                    <a class="btn btn-success" href="{{asset('/edit/' . $task->id )}}">Edit task</a>
+                    <a class="btn btn-danger" href="{{asset('/delete' . $task->id )}}">Delete task</a>
+                </td>
             </tr>
         @endforeach
     </table>
